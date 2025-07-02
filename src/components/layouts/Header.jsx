@@ -6,12 +6,19 @@ import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { FiLogIn } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
+import DefaultLayout from "./DefaultLayout";
 
 const Header = () => {
   return (
     <Navbar expand="md" className="bg-dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Authentication-System</Navbar.Brand>
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          className="text-white text-decoration-none"
+        >
+          Authentication-System
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
