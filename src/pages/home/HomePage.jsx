@@ -4,7 +4,7 @@ import Container from "react-bootstrap/esm/Container";
 import { Row, Col } from "react-bootstrap";
 const HomePage = () => {
   return (
-    <div className="homePage min-vh-100 d-flex align-items-center bg-light">
+    <div className="homePage  d-flex align-items-center bg-light">
       <Container>
         <Row className="align-items-center">
           <Col md={6} className="text-center text-md-start mb-4 mb-md-0">

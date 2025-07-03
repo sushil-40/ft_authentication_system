@@ -6,6 +6,7 @@ import SignUpPage from "../pages/auth/SignUpPage";
 import UserLayout from "../components/layouts/UserLayout";
 import HomePage from "../pages/home/HomePage";
 import DashboardPage from "../pages/dashboard/DashboardPage";
+import ForgetPasswordPage from "../pages/auth/ForgetPasswordPage";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route index element={<HomePage />}></Route>
         <Route path="login" element={<SignInPage />}></Route>
         <Route path="signup" element={<SignUpPage />}></Route>
+        <Route path="forgot-password" element={<ForgetPasswordPage />}></Route>
       </Route>
       {/* private routing  */}
       <Route path="/user" element={<UserLayout />}>
