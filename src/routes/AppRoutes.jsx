@@ -3,10 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import DefaultLayout from "../components/layouts/DefaultLayout";
 import SignInPage from "../pages/auth/SignInPage";
 import SignUpPage from "../pages/auth/SignUpPage";
-import UserLayout from "../components/layouts/UserLayout";
-import HomePage from "../pages/home/HomePage";
-import DashboardPage from "../pages/dashboard/DashboardPage";
-import ForgetPasswordPage from "../pages/auth/ForgetPasswordPage";
+import UserLayout from "@components/layouts/UserLayout";
+import HomePage from "@pages/home/HomePage";
+import DashboardPage from "@pages/dashboard/DashboardPage";
+import ForgetPasswordPage from "@pages/auth/ForgetPasswordPage";
 
 const AppRoutes = () => {
   return (
