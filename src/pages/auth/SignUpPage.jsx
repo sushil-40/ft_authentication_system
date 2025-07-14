@@ -1,6 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
+import CustomInput from "../../components/customInput/CustomInput";
+import { signUpInputs } from "../../assets/customInputs/userSignUpInput";
 
 const SignUpPage = () => {
   return (
@@ -12,24 +14,10 @@ const SignUpPage = () => {
       </div>
 
       <div className="form-content">
-        <Form className="form p-4" style={{ border: "1px solid black" }}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter first name" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter last name" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
+        <Form className="form p-4 shadow-lg">
+          {signUpInputs.map((input) => (
+            <CustomInput key={input.name} {...input} />
+          ))}
 
           <Button className="w-100" variant="primary" type="submit">
             Submit
