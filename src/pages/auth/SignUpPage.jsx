@@ -1,17 +1,28 @@
+/* eslint-disable no-unused-vars */
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import CustomInput from "../../components/customInput/CustomInput";
 import { signUpInputs } from "../../assets/customInputs/userSignUpInput";
 import useForm from "../../hooks/useForm";
+import { signUpNewUserApi } from "../../services/authAPI";
 
 const initialState = {};
 const SignUpPage = () => {
-  const { form, setForm, handleOnChange } = useForm(initialState);
-  const handleOnSubmit = (e) => {
+  const { form, setForm, handleOnChange, passwordErrors } =
+    useForm(initialState);
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     console.log(form);
+    const { confirmPassword, ...rest } = form;
+    if (confirmPassword !== rest.password) {
+      return alert("Password do not match");
+    }
+
+    const result = await signUpNewUserApi(form);
+    console.log(result);
   };
+  console.log(passwordErrors, "******");
   return (
     <div className="form-wrapper bg-body-tertiary m-1 d-flex justify-content-center align-items-center flex-column">
       <div className="text-center">
@@ -29,8 +40,20 @@ const SignUpPage = () => {
               onChange={handleOnChange}
             />
           ))}
-
-          <Button className="w-100" variant="primary" type="submit">
+          <div className="py-3">
+            <ul className="text-danger">
+              {passwordErrors.length > 0 &&
+                passwordErrors.map((msg) => {
+                  return <li key={msg}>{msg}</li>;
+                })}
+            </ul>
+          </div>
+          <Button
+            className="w-100"
+            variant="primary"
+            type="submit"
+            disabled={passwordErrors.length > 0 ? true : false}
+          >
             Submit
           </Button>
         </Form>
