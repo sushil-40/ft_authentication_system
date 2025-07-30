@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import CustomInput from "../../components/customInput/CustomInput";
 import { signUpInputs } from "../../assets/customInputs/userSignUpInput";
 import useForm from "../../hooks/useForm";
-import { signUpNewUserApi } from "../../services/authAPI";
+import { signUpNewUSerApi } from "../../services/authAPI";
 
 const initialState = {};
 const SignUpPage = () => {
@@ -13,16 +13,19 @@ const SignUpPage = () => {
     useForm(initialState);
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    const { confirmPassword, ...rest } = form;
-    if (confirmPassword !== rest.password) {
-      return alert("Password do not match");
-    }
 
-    const result = await signUpNewUserApi(form);
+    const { confirmPassword, ...rest } = form;
+    if (confirmPassword !== rest.password)
+      return alert("Password do not match");
+
+    const result = await signUpNewUSerApi(rest);
+
     console.log(result);
+    if (result.status === "success") {
+      setForm(initialState);
+    }
   };
-  console.log(passwordErrors, "******");
+
   return (
     <div className="form-wrapper bg-body-tertiary m-1 d-flex justify-content-center align-items-center flex-column">
       <div className="text-center">
@@ -37,6 +40,7 @@ const SignUpPage = () => {
             <CustomInput
               key={input.name}
               {...input}
+              value={form[input.name] || ""}
               onChange={handleOnChange}
             />
           ))}
