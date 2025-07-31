@@ -3,7 +3,7 @@ import { validator } from "../utils/validatePassword";
 
 const handleOnChange = ({ e, form, setForm }) => {
   const { name, value } = e.target;
-  console.log(value);
+  // console.log(value);
   setForm({
     ...form,
     [name]: value,

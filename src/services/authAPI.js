@@ -11,6 +11,14 @@ export const signUpNewUSerApi = async (payload) => {
     showToast: true,
   };
   const result = await apiProcessor(obj);
-  console.log(result);
+  // console.log(result);
   return result;
+};
+export const activateNewUserApi = async (payload) => {
+  const obj = {
+    url: authApiEP + "/activate-user",
+    method: "post",
+    payload,
+  };
+  return apiProcessor(obj);
 };

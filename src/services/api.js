@@ -17,9 +17,14 @@ export const apiProcessor = async ({ url, method, payload, showToast }) => {
     showToast && toast[data.status](data.message);
     return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     // return error.response.data;
     const msg = error?.response?.data?.message || error.message;
-    toast.error(msg);
+    showToast && toast.error(msg);
+
+    return {
+      status: "error",
+      message: msg,
+    };
   }
 };
