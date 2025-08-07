@@ -5,6 +5,7 @@ import CustomInput from "../../components/customInput/CustomInput.jsx";
 import Card from "react-bootstrap/Card";
 import useForm from "../../hooks/useForm.js";
 import { useRef } from "react";
+import { signInUserApi } from "../../services/authAPI.js";
 
 const initialState = {};
 const SignInPage = () => {
@@ -13,14 +14,20 @@ const SignInPage = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    console.log(email, password);
-    // {
-    //   console.log(form);
-    // }
+    console.log(form);
+    if (form.email && form.password) {
+      const { payload } = await signInUserApi(form);
+      console.log(payload);
+
+      sessionStorage.setItem("accessJWT", payload.accessJWT);
+      localStorage.setItem("refreshJWT", payload.refreshJWT);
+
+      //ToDo get user and redirecting to dashboard
+    } else {
+      alert("Both nput must be filled");
+    }
   };
   return (
     // <div className="form-wrapper bg-body-tertiary m-1 d-flex justify-content-center align-items-center flex-column">
@@ -71,7 +78,7 @@ const SignInPage = () => {
               type="email"
               required
               placeholder="name@email.com"
-              // onChange={handleOnChange}
+              onChange={handleOnChange}
               ref={emailRef}
             />
             <CustomInput
@@ -80,7 +87,7 @@ const SignInPage = () => {
               type="password"
               required
               placeholder="***********"
-              // onChange={handleOnChange}
+              onChange={handleOnChange}
               ref={passwordRef}
             />
             <div className="d-grid">
