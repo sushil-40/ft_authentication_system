@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import useForm from "../../hooks/useForm.js";
 import { useRef } from "react";
 import { signInUserApi } from "../../services/authAPI.js";
+import { fetchUserApi } from "../../features/user/userAPI.js";
 
 const initialState = {};
 const SignInPage = () => {
@@ -19,10 +20,17 @@ const SignInPage = () => {
     console.log(form);
     if (form.email && form.password) {
       const { payload } = await signInUserApi(form);
-      console.log(payload);
+      // console.log(payload);
+      if (payload?.accessJWT) {
+        sessionStorage.setItem("accessJWT", payload.accessJWT);
+        localStorage.setItem("refreshJWT", payload.refreshJWT);
+        console.log(payload);
 
-      sessionStorage.setItem("accessJWT", payload.accessJWT);
-      localStorage.setItem("refreshJWT", payload.refreshJWT);
+        //call api to get user profile
+
+        const userInfo = await fetchUserApi();
+        console.log(userInfo);
+      }
 
       //ToDo get user and redirecting to dashboard
     } else {
