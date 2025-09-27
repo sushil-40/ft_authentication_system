@@ -7,10 +7,13 @@ import useForm from "../../hooks/useForm.js";
 import { useRef } from "react";
 import { signInUserApi } from "../../services/authAPI.js";
 import { fetchUserApi } from "../../features/user/userAPI.js";
+import { fetchUserAction } from "../../features/user/userAction.js";
+import { useDispatch } from "react-redux";
 
 const initialState = {};
 const SignInPage = () => {
   const { form, handleOnChange } = useForm(initialState);
+  const dispatch = useDispatch();
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -24,12 +27,10 @@ const SignInPage = () => {
       if (payload?.accessJWT) {
         sessionStorage.setItem("accessJWT", payload.accessJWT);
         localStorage.setItem("refreshJWT", payload.refreshJWT);
-        console.log(payload);
+        // console.log(payload);
 
         //call api to get user profile
-
-        const userInfo = await fetchUserApi();
-        console.log(userInfo);
+        dispatch(fetchUserAction());
       }
 
       //ToDo get user and redirecting to dashboard
